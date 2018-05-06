@@ -11,6 +11,7 @@ ActiveRecord::Base.establish_connection(
 set :views, File.expand_path('../views', File.dirname(__FILE__))
 
 get '/' do
+		@page = 'hello'
 		erb :hello
 	end
 
