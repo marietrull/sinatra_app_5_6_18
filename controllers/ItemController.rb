@@ -5,14 +5,14 @@ class ItemController < ApplicationController
 
 	# index route 
 	get '/' do
-		@items = Item.all
+		@user = User.find session[:user_id]
+		@items = @user.items
 		@page = "Index of Items"
 		erb :item_index
 	end
 
 	# add route
 	get '/add' do
-		@item.user_id = session[:user_id]
 		@page = "Add Item"
 		@action = "/items"
 		@method = "POST"
@@ -33,7 +33,7 @@ class ItemController < ApplicationController
 
 	    @item = Item.new
 	    @item.title = params[:title]
-	    @item.user_id = params[:user_id] # for now
+	    @item.user_id = session[:user_id] # for now
 	    @item.save
 
 	    session[:message] = "You added item #{@item.id}."
