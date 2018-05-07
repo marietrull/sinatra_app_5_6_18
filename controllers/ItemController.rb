@@ -76,4 +76,12 @@ class ItemController < ApplicationController
 		redirect '/items'
 	end
 
+	# this is called a filter and will be run before all requests in this route
+	before do
+		if !session[:logged_in]
+			session[:message] = "You must be logged in to do that"
+			redirect '/user/login'
+		end
+	end
+
 end
