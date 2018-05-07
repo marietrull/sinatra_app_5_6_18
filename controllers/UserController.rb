@@ -17,6 +17,7 @@ class UserController < ApplicationController
 
 		if @user && @user.password == params[:password]
 			session[:username] = @user.username
+			session[:user_id] = @user.id
 			session[:logged_in] = true
 			session[:message] = "Logged in as #{@user.username}"
 			redirect '/items'
@@ -33,12 +34,14 @@ class UserController < ApplicationController
 		@user.save
 		session[:logged_in] = true
 		session[:username] = @user.username
+		session[:user_id] = @user.id
 		session[:message] = "Thank you for registering (as #{@user.username}).  Enjoy the site!"
 		redirect '/items'
 	end
 
 	get '/logout' do
 		session[:username] = nil
+		session[:user_id] = nil
 		session[:logged_in] = false
 		redirect '/user/login'
 	end

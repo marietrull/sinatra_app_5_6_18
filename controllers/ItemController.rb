@@ -12,6 +12,7 @@ class ItemController < ApplicationController
 
 	# add route
 	get '/add' do
+		@item.user_id = session[:user_id]
 		@page = "Add Item"
 		@action = "/items"
 		@method = "POST"
