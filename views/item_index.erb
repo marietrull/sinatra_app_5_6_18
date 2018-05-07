@@ -4,6 +4,7 @@
 		<form action="/items/<%= item.id %>" method="POST">
 		<input type="hidden" name="_method" value="DELETE" />
 		<li><%= item.title %></li> 
+		<a href="/items/edit/<%= item.id %>">(Edit)</a>
 		<button>Delete</button>
 		</form>
 	<% end %>
