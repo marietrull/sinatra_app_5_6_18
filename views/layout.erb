@@ -1,24 +1,29 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title><%= @page %></title>
+  <title> <%= @page %> </title>
   <link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-
   <nav>
     <!-- REMEMBER: DO NOT USE INLINE STYLES.  -->
-    <p >Nav:
-      <a href="/items">Item list</a> •
-      <a href="/items/add">Add Items</a>
-    </p>
+    <p style="display: inline-block;">Nav:</p>
+    <a href="/items">Item list</a> •
+    <a href="/items/add">Add Items</a>
   </nav>
   
+  <% if session[:message] %>
+    <p class="msg">
+    <%= session[:message] %>
+    </p>
+    <% session[:message] = nil
+  end %>
+  
   <h1 id="app-name">Awesome Site!</h1> 
+    <h1 style="border: 1px solid blue; border-radius: 10px">Awesome Item App (this h1 is in hello.erb)</h1>
 
-	<h1 >Awesome Item App (this h1 is in hello.erb)</h1>
-
-	<%= yield %>
+    <%= yield %>
 
 </body>
 </html>

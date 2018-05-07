@@ -1,14 +1,14 @@
+
 require './controllers/ApplicationController.rb'
 
 class ItemController < ApplicationController
 
-	# index route
- 	get '/' do
-		@items = Item.all # beautiful isn't it
-		# @items.to_json
-		@page = "Index of items"
+	# index route 
+	get '/' do
+		@items = Item.all
+		@page = "Index of Items"
 		erb :item_index
-  	end
+	end
 
 	# add route
 	get '/add' do
@@ -35,18 +35,19 @@ class ItemController < ApplicationController
 	    @item.user_id = params[:user_id] # for now
 	    @item.save
 
-	    @item.to_json
-	    
-	    # @item.to_json # we will come back to this
-		redirect '/items'
+	    session[:message] = "You added item #{@item.id}."
+	    # @item.to_json
+	    redirect '/items'
 	end
 
+	# delete route
 	delete '/:id' do
 		# there are many ways to do this find statement, this is just one
 		# remember you can play around with ActiveRecord by adding binding.pry 
 		# and trying stuff out
 		@item = Item.find params[:id]
 		@item.destroy
+		session[:message] = "You deleted item \##{@item.id}"
 		redirect '/items'
 	end
 
@@ -71,7 +72,8 @@ class ItemController < ApplicationController
 
 		@item.title = params[:title]
 		@item.save
+		session[:message] = "You updated item \##{@item.id}"
 		redirect '/items'
 	end
-end
 
+end
